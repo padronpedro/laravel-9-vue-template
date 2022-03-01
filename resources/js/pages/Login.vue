@@ -5,6 +5,7 @@
         <v-btn @click="login()">Login</v-btn>
         <v-btn @click="register()">Register</v-btn>
         <v-btn @click="test()">Test</v-btn>
+        <v-btn @click="logout()">Logout</v-btn>
         {{ jsonResponse}}
       </v-container>
     </v-main>
@@ -19,6 +20,24 @@ export default {
     }
   },
   methods: {
+    logout() {
+        axios.post('api/logout')
+          .then(response => {
+            console.log('test',response)
+            this.jsonResponse = response.data
+              if(response.data.status=='ERROR')
+              {
+                  // this.$showError(this.$t('Error')+': '+response.data.message,'error',this)
+              }else{
+                  // window.location='/home'
+              }
+          })
+          .catch(error => {
+              // this.loading = false
+              // var getResponse = error.response.data
+              // this.$showError(getResponse.message,'error',this)
+          })
+    },
     test () {
         axios.get('api/test')
           .then(response => {
@@ -32,6 +51,7 @@ export default {
               }
           })
           .catch(error => {
+            this.jsonResponse = 'not authenticated'
               // this.loading = false
               // var getResponse = error.response.data
               // this.$showError(getResponse.message,'error',this)
@@ -48,6 +68,7 @@ export default {
         axios.post('login', parameters)
           .then(response => {
             console.log('login',response)
+            this.jsonResponse = response.data
               if(response.data.status=='ERROR')
               {
                   // this.$showError(this.$t('Error')+': '+response.data.message,'error',this)
