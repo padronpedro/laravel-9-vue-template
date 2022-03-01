@@ -10,6 +10,7 @@ window.Vue = require('vue').default
 
 import router from './router'
 import store from './store'
+import vuetify from './vuetify'
 import App from './layouts/App.vue'
 
 /**
@@ -34,6 +35,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     router,
     store,
+    vuetify,
     el: '#app',
     render: h => h(App)
 });
