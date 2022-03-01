@@ -2,12 +2,38 @@
   <div>
     <button @click="login()">Login</button>
     <button @click="register()">Register</button>
+    <button @click="test()">Test</button>
+    {{ jsonResponse}}
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      jsonResponse: ''
+    }
+  },
   methods: {
+    test () {
+        axios.get('api/test')
+          .then(response => {
+            console.log('test',response)
+            this.jsonResponse = response.data
+              if(response.data.status=='ERROR')
+              {
+                  // this.$showError(this.$t('Error')+': '+response.data.message,'error',this)
+              }else{
+                  // window.location='/home'
+              }
+          })
+          .catch(error => {
+              // this.loading = false
+              // var getResponse = error.response.data
+              // this.$showError(getResponse.message,'error',this)
+          })
+
+    },
     login() {
       axios.get('/sanctum/csrf-cookie').then(response => {
         console.log('sanctum',response)
