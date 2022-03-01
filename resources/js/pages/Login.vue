@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <button @click="login()">Login</button>
-    <button @click="register()">Register</button>
-    <button @click="test()">Test</button>
-    {{ jsonResponse}}
-  </div>
+  <v-app>
+    <v-main>
+      <v-container>
+        <v-btn @click="login()">Login</v-btn>
+        <v-btn @click="register()">Register</v-btn>
+        <v-btn @click="test()">Test</v-btn>
+        {{ jsonResponse}}
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
